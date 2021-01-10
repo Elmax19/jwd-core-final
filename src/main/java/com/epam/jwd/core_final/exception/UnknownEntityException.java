@@ -19,8 +19,14 @@ public class UnknownEntityException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        // todo
-        // you should use entityName, args (if necessary)
-        return null;
+        StringBuilder message = new StringBuilder("Неверные данные для " + entityName + " !");
+        if (args != null) {
+            message.append(" Возможные аргументы:");
+            for (Object arg : args) {
+                message.append(' ').append(arg).append(',');
+            }
+            message.deleteCharAt(message.capacity() - 1);
+        }
+        return message.toString();
     }
 }
